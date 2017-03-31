@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python3.6
 
 # backtracking solution
 def tracepath(i, j, n, step, matrix):
@@ -11,19 +11,15 @@ def tracepath(i, j, n, step, matrix):
     return False
   if j < 0:
     return False
-
-  # check if this square has already been visited
+  # check if this step's house has already been visited
   if matrix[i][j] != 0:
     return False
-
   # make this step
   step += 1
   matrix[i][j] = step
-
   # if this is the last step them we find it
   if step == n*n:
     return True
-
   # Recursively check all possible movements
   if tracepath(i+2, j+1, n, step, matrix):
     return True
@@ -39,7 +35,7 @@ def tracepath(i, j, n, step, matrix):
     return True
   elif tracepath(i+1, j-2, n, step, matrix):
     return True
-  elif tracepath(i+2, j-2, n, step, matrix):
+  elif tracepath(i+2, j-1, n, step, matrix):
     return True
   # If all possible moves fall into some negation then this step is not possible
   else:
@@ -54,11 +50,11 @@ def main(n):
     for j in range(0, n):
       matrix[i].append(0)
   if tracepath(0, 0, n, 0, matrix):
-    print "This matrix below represents the board with each step being made by the horse:"
+    print ("This matrix below represents the board with each step being made by the horse:")
     for i in range(n-1, -1, -1):
-      print matrix[i]
+      print (matrix[i])
   else:
-    print "No solution for board %sx%s" % (n,n)
+    print ("No solution for board %sx%s" % (n,n))
 
 if __name__ == "__main__":
   import sys
